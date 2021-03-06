@@ -1,0 +1,5 @@
+# Standard C .gitignore
+*.o
+*.a
+*.so
+*.exe

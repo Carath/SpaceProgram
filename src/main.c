@@ -46,8 +46,6 @@ unsigned int SimulationFrameIndex = 0; // For controlling the simulation elapsed
 
 double FrameBatchTime = 0.; // Used to store the sum of the real frame times, per frame batch.
 
-double *DistArray = NULL; // Used as a buffer for physics coomputations. To be freed at exit.
-
 
 int main(int argc, char **argv)
 {
@@ -213,7 +211,7 @@ int main(int argc, char **argv)
 	////////////////////////////////////////////////////////////
 	// Freeing and Quitting:
 
-	free(DistArray);
+	freePhysicsResources();
 
 	for (int i = 0; i < bodies_number; ++i)
 		freeBody(bodies[i]);

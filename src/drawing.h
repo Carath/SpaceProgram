@@ -51,7 +51,7 @@ void drawCross(int x, int y);
 void drawArrow(int startX, int startY, float directionX, float directionY, float ratio);
 
 
-// Draws a disk, with the current color.
+// Draws a disk, with the current color, using the Bresenham's circle algorithm.
 // Double precision rescaled coordinates must be passed for this to work properly.
 void fillCircle(double x0, double y0, double radius);
 

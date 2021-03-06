@@ -32,8 +32,6 @@ static int HUDcounter = 0;
 // Draws a set of bodies, along with the user inputs for a spaceship. To not draw them, pass NULL as 'input'.
 void drawBodies(Body **bodies, int bodies_number, Input *input)
 {
-	setColor(&Yellow);
-
 	for (int i = 0; i < bodies_number; ++i)
 	{
 		if (bodies[i] == NULL)
@@ -68,12 +66,12 @@ void drawBodies(Body **bodies, int bodies_number, Input *input)
 
 				drawArrow(x_onScreen + arrowShiftX, y_onScreen + arrowShiftY, 2 * arrowShiftX, 2 * arrowShiftY, 0.5);
 			}
-
-			setColor(&Yellow); // back to default.
 		}
 
 		else
 		{
+			setColor(&Yellow);
+
 			if (DRAW_COMPASS_ALL_OBJECTS)
 				drawCompass(x_rescaled, y_rescaled); // using double precision.
 
@@ -206,8 +204,9 @@ void drawArrow(int startX, int startY, float directionX, float directionY, float
 }
 
 
-// Draws a disk, with the current color.
+// Draws a disk, with the current color, using the Bresenham's circle algorithm.
 // Double precision rescaled coordinates must be passed for this to work properly.
+// This may be slow for very large circles intersecting the window...
 void fillCircle(double x0, double y0, double radius)
 {
 	int may_appear, is_covered;

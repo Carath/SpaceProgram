@@ -131,6 +131,12 @@ inline int isInWindow(double x, double y)
 }
 
 
+inline int isInCircle(double centerX, double centerY, double radius, double x, double y)
+{
+	return (x - centerX) * (x - centerX) + (y - centerY) * (y - centerY) <= radius * radius;
+}
+
+
 // Checks if the body can appear on-screen, and if the whole screen is covered by said body.
 // Double precision rescaled coordinates and radius must be passed for this to work properly.
 void bodyScreenCheck(double x, double y, double radius, int *may_appear, int *is_covered)
@@ -139,7 +145,10 @@ void bodyScreenCheck(double x, double y, double radius, int *may_appear, int *is
 	double xmin_2 = x - radius, xmax_2 = x + radius, ymin_2 = y - radius, ymax_2 = y + radius; // body bounds.
 
 	*may_appear = (xmax_1 >= xmin_2 && xmin_1 <= xmax_2) && (ymax_1 >= ymin_2 && ymin_1 <= ymax_2);
-	*is_covered = (xmin_1 >= xmin_2 && xmax_1 <= xmax_2) && (ymin_1 >= ymin_2 && ymax_1 <= ymax_2);
+
+	// *is_covered = (xmin_1 >= xmin_2 && xmax_1 <= xmax_2) && (ymin_1 >= ymin_2 && ymax_1 <= ymax_2); // box only.
+	*is_covered = isInCircle(x, y, radius, xmin_2, ymin_2) && isInCircle(x, y, radius, xmin_2, ymax_2) &&
+		isInCircle(x, y, radius, xmax_2, ymin_2) && isInCircle(x, y, radius, xmax_2, ymax_2); // circle only.
 }
 
 

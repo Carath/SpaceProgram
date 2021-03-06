@@ -21,6 +21,15 @@ static double FrameTimeMultiplier = (double) INIT_TIME_MULTIPLIER / REAL_FRAMERA
 static double ElapsedSimulationTime = 0.;
 static unsigned int LastSimulationFrameIndex = 0;
 
+static double *DistArray = NULL; // Used as a buffer for physics coomputations. To be freed at exit.
+
+
+void freePhysicsResources(void)
+{
+	free(DistArray);
+	DistArray = NULL;
+}
+
 
 // Returns the amount of simulation time a user second represents:
 inline double getTimeScale(void)
@@ -146,7 +155,7 @@ inline void update_accel_input(Body *ship, Input *input, double thrust)
 // Initialise the buffer array containing the distance for each interaction:
 static void init_DistArray(int interaction_number)
 {
-	if (DistArray != NULL)
+	if (DistArray)
 		return;
 
 	DistArray = (double*) calloc(interaction_number, sizeof(double));

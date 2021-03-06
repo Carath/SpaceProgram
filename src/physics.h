@@ -6,10 +6,13 @@
 #include "user_inputs.h"
 
 
-extern double *DistArray;
 extern int IndexFollowedBody;
 extern int CollisionsEnabled;
 extern unsigned int SimulationFrameIndex;
+
+
+// To be done upon exit.
+void freePhysicsResources(void);
 
 
 // Returns the amount of simulation time a user second represents:
