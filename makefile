@@ -24,6 +24,8 @@ endif
 
 # For better performance:
 PROCESSOR_ARCH = -march=native
+
+# Multithreading API:
 OPENMP = -fopenmp
 
 # N.B: gcc for C, g++ for C++, alternative: clang.
