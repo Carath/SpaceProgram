@@ -1,14 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////////
-// SDLA v1.5
-////////////////////////////////////////////////////////////////////////////////////
-
-// This is an unofficial SDL2 addon, whose purpose is to make SDL easier to use.
-// SDL, SDL_image and SDL_ttf are needed for this to work.
-
-// Note: SDL2 (v2.0.8) suffers from a small memory leak, of a fixed size: 4,249 bytes in 4 blocks.
-// This is unrelated to SDLA, and will happen when one simply calls SDL_Init() followed by SDL_Quit().
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -1,17 +1,22 @@
 ////////////////////////////////////////////////////////////////////////////////////
-// SDLA v1.5
-////////////////////////////////////////////////////////////////////////////////////
-
-// This is an unofficial SDL2 addon, whose purpose is to make SDL easier to use.
+// SDLA is an unofficial SDL2 addon, whose purpose is to make SDL easier to use.
 // SDL, SDL_image and SDL_ttf are needed for this to work.
 
-// Note: SDL2 (v2.0.8) suffers from a small memory leak, of a fixed size: 4,249 bytes in 4 blocks.
-// This is unrelated to SDLA, and will happen when one simply calls SDL_Init() followed by SDL_Quit().
-
+// Note:
+// - SDL v2.0.8 suffers from a few kilobytes memory leak, of a fixed size. This is benign,
+// and unrelated to SDLA, it will happen when one simply calls SDL_Init() followed by SDL_Quit().
+// - SDL2 v2.0.10 causes a drawing bug: rendering something changes the color of a specific pixel
+// of the last drawn object. Do not use this version, v2.0.14 for example doesn't have this issue.
+////////////////////////////////////////////////////////////////////////////////////
 
 #ifndef SDLA_H
 #define SDLA_H
 
+#define SDLA_VERSION 1.5
+
+#if __cplusplus
+extern "C" {
+#endif
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -182,5 +187,9 @@ void SDLA_FreeCachedFont(CachedFont *cached_font);
 // Prints the given cached font details in the console.
 void SDLA_PrintCachedFontInfo(CachedFont *cached_font);
 
+
+#if __cplusplus
+}
+#endif
 
 #endif
