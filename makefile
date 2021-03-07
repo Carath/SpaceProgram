@@ -34,22 +34,25 @@ LDFLAGS =
 LDLIBS = $(GRAPHIC_LINKS) $(OPENMP) -lm
 
 ##########################################################
-# Compiling rules:
+# Collecting files:
 
 # Creates the OBJ_DIR directory, if necessary:
 $(shell mkdir -p $(OBJ_DIR))
 
 EXE = $(EXE_NAME).exe
 
+# Sources and objects files:
+SRC = $(wildcard $(SRC_DIR)/*.c)
+OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+##########################################################
+# Compilation rules:
+
 # The following names are not associated with files:
 .PHONY: all clean
 
 # All executables to be created:
 all: $(EXE)
-
-# Sources and objects files:
-SRC = $(wildcard $(SRC_DIR)/*.c)
-OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Linking the program:
 $(EXE): $(OBJ)
