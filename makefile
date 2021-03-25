@@ -4,7 +4,7 @@
 # Executable name:
 EXE_NAME = spaceprogram
 
-# Source and objects files location:
+# Source and object files locations:
 SRC_DIR = src
 OBJ_DIR = obj
 
@@ -29,11 +29,11 @@ PROCESSOR_ARCH = -march=native
 OPENMP = -fopenmp
 
 # N.B: gcc for C, g++ for C++, alternative: clang.
-CC = gcc
-CPPFLAGS =
-CFLAGS = -std=c99 -Wall -O2 $(PROCESSOR_ARCH) $(GRAPHIC_FLAGS) $(OPENMP)
-LDFLAGS =
-LDLIBS = $(GRAPHIC_LINKS) $(OPENMP) -lm
+CC := gcc
+CPPFLAGS :=
+CFLAGS := -std=c99 -Wall -O2 $(PROCESSOR_ARCH) $(GRAPHIC_FLAGS) $(OPENMP)
+LDFLAGS :=
+LDLIBS := $(GRAPHIC_LINKS) $(OPENMP) -lm
 
 ##########################################################
 # Collecting files:
@@ -41,11 +41,11 @@ LDLIBS = $(GRAPHIC_LINKS) $(OPENMP) -lm
 # Creates the OBJ_DIR directory, if necessary:
 $(shell mkdir -p $(OBJ_DIR))
 
-EXE = $(EXE_NAME).exe
-
-# Sources and objects files:
-SRC = $(wildcard $(SRC_DIR)/*.c)
-OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+# Executable, sources, objects files and dependencies:
+EXE := $(EXE_NAME).exe
+SRC := $(wildcard $(SRC_DIR)/*.c)
+OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+DEP := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.d)
 
 ##########################################################
 # Compilation rules:
@@ -62,8 +62,10 @@ $(EXE): $(OBJ)
 
 # Compiling the source files:
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+	$(CC) -MP -MD $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+
+-include $(DEP)
 
 # Cleaning with 'make clean' the object files:
 clean:
-	rm -fv $(EXE) $(OBJ_DIR)/*
+	rm -fv $(EXE) $(OBJ_DIR)/*.o $(OBJ_DIR)/*.d

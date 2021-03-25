@@ -16,7 +16,7 @@ sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev libfreetype6-dev
 
 ## Compilation
 
-Compiling is done by running ``` make ```. Note that when modifying header files, ``` make clean ``` must be run beforehand.
+Compiling is done by running ``` make ```.
 
 
 ## Runtime
