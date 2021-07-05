@@ -2,6 +2,8 @@
 
 *Just simulating the universe*
 
+<img src="img/preview.png" alt="preview" width="900" height="515">
+
 
 ## Installation
 
@@ -20,6 +22,8 @@ Compiling is done by running ``` make ```.
 
 
 ## Runtime
+
+Try the program by running the command below, with an optional integer argument between 0 and 2:
 
 ```
 ./spaceprogram.exe
