@@ -1,0 +1,14 @@
+version: "2.3"
+
+services:
+
+  gui-app:
+    image: gui-app:1.0
+    container_name: gui-app
+    build: .
+    volumes:
+      - $HOME/.Xauthority:/root/.Xauthority:rw # Linux specific
+    environment:
+      - DISPLAY
+    network_mode: host
+    command: $COMMAND
