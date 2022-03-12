@@ -41,7 +41,7 @@ Both the compiling and the runtime GUI can be containerized using [Docker](https
 
 Limitations:
 - For now, this only works on Linux.
-- This is not space efficient: the resulting image weights 580 Mb (``` busybox:1.33.1-glibc ``` couldn't be used due to libraries (SDL2) needing to be linked, and static executable failed to build).
+- This is not space efficient: the resulting image weights 580 MB (``` busybox:1.33.1-glibc ``` couldn't be used due to libraries (SDL2) needing to be linked, and static executable failed to build).
 
 #### With vanilla Docker
 
@@ -51,7 +51,7 @@ Buiding the image:
 sudo docker build -t gui-app:1.0 .
 ```
 
-Running the containerized GUI, with runtime arg ``` 2 ```:
+Running the containerized GUI (not as root), with runtime arg ``` 2 ```:
 
 ```
 sudo docker run \
@@ -70,10 +70,10 @@ Buiding the image:
 sudo docker-compose build
 ```
 
-Running the containerized GUI:
+Running the containerized GUI (not as root):
 
 ```
 sudo COMMAND="./spaceprogram.exe 2" HOME=$HOME docker-compose up
 ```
 
-Note: $HOME content should be user's home directory, not ``` /root/ ```. Giving said HOME arg was necessary on Ubuntu 20.04, but not needed on CentOS 7.
+Note: ``` $HOME ``` content should be the user home directory, not ``` /root/ ```. Giving said path was necessary on Ubuntu 20.04, but not needed on CentOS 7.
